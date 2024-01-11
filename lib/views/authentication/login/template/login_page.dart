@@ -11,6 +11,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "Login Page",
       home: Scaffold(
         body: Container(
@@ -64,8 +65,7 @@ class _LoginPageState extends State<LoginPage> {
                                             CrossAxisAlignment.stretch,
                                         children: [
                                           const Padding(
-                                            padding: EdgeInsets.only(
-                                                bottom: 7),
+                                            padding: EdgeInsets.only(bottom: 7),
                                             child: Text(
                                               'Email or phone number',
                                               textAlign: TextAlign.start,
@@ -91,13 +91,13 @@ class _LoginPageState extends State<LoginPage> {
                                                 top: 5,
                                                 bottom: 5),
                                             child: const TextField(
-                                              cursorColor: Color.fromARGB(255, 82, 82, 82),
+                                              cursorColor: Color.fromARGB(
+                                                  255, 82, 82, 82),
                                               style: TextStyle(
                                                 color: Color(0xFF666666),
                                                 fontSize: 16,
                                                 fontFamily: "Poppins",
                                                 fontWeight: FontWeight.w400,
-                                                height: 0,
                                               ),
                                               decoration: InputDecoration(
                                                 contentPadding:
@@ -121,9 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                                               ),
                                             ),
                                           )
-                                        ]
-                                    )
-                                ),
+                                        ])),
                                 Container(
                                     padding: const EdgeInsets.only(top: 24),
                                     child: Column(
@@ -131,18 +129,15 @@ class _LoginPageState extends State<LoginPage> {
                                             CrossAxisAlignment.stretch,
                                         children: [
                                           const Padding(
-                                            padding: EdgeInsets.only(
-                                                bottom: 7),
+                                            padding: EdgeInsets.only(bottom: 7),
                                             child: Text(
                                               'Password',
                                               textAlign: TextAlign.start,
                                               style: TextStyle(
-                                                color: Color(0xFF666666),
-                                                fontSize: 16,
-                                                fontFamily: "Poppins",
-                                                fontWeight: FontWeight.w400,
-                                                height: 0,
-                                              ),
+                                                  color: Color(0xFF666666),
+                                                  fontSize: 16,
+                                                  fontFamily: "Poppins",
+                                                  fontWeight: FontWeight.w400),
                                             ),
                                           ),
                                           Container(
@@ -158,20 +153,20 @@ class _LoginPageState extends State<LoginPage> {
                                                 top: 5,
                                                 bottom: 5),
                                             child: const TextField(
-                                              cursorColor: Color.fromARGB(255, 82, 82, 82),
+                                              cursorColor: Color.fromARGB(
+                                                  255, 82, 82, 82),
                                               style: TextStyle(
-                                                color: Color(0xFF666666),
+                                                color: Color.fromARGB(
+                                                    255, 82, 82, 82),
                                                 fontSize: 16,
-                                                  fontFamily: "Poppins",
-                                                  fontWeight: FontWeight.w400,
-                                                height: 0,
+                                                fontFamily: "Poppins",
                                               ),
                                               decoration: InputDecoration(
                                                 contentPadding:
                                                     EdgeInsets.all(0),
-                                                filled: true,
-                                                fillColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
+                                                //   filled: true,
+                                                //   fillColor: Colors.transparent,
+                                                //   hoverColor: Colors.transparent,
                                                 hintText: "Password",
                                                 enabledBorder:
                                                     OutlineInputBorder(
@@ -188,23 +183,77 @@ class _LoginPageState extends State<LoginPage> {
                                               ),
                                             ),
                                           )
-                                        ]
-                                      )
-                                    ),
+                                        ])),
                                 const Padding(
                                   padding: EdgeInsets.only(top: 8),
                                   child: Text(
                                     'Forget your password',
                                     style: TextStyle(
-                                        color: Color(0xFF111111),
-                                        fontSize: 16,
-                                        fontFamily: "Poppins",
-                                        fontWeight: FontWeight.w500,
-                                        decoration: TextDecoration.underline,
-                                        height: 0,
+                                      color: Color(0xFF111111),
+                                      fontSize: 16,
+                                      fontFamily: "Poppins",
+                                      fontWeight: FontWeight.w500,
+                                      decoration: TextDecoration.underline,
+                                      height: 0,
                                     ),
-                                  ),
-                                )
+                                  )
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 32),
+                                  child: ElevatedButton(
+                                      onPressed: () {},
+                                      style: ButtonStyle(
+                                          elevation:
+                                              MaterialStateProperty.all(0),
+                                          backgroundColor:
+                                              MaterialStateProperty.all(
+                                                  const Color.fromRGBO(
+                                                      0, 0, 0, 0.25))),
+                                      child: const Padding(
+                                        padding: EdgeInsets.all(15),
+                                        child: Text(
+                                          'Log in',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 22,
+                                            fontFamily: 'Poppins',
+                                            fontWeight: FontWeight.w500,
+                                            height: 0,
+                                          ),
+                                        ),
+                                      )),
+                                ),
+                                const Padding(
+                                    padding: EdgeInsets.only(top: 32),
+                                    child: Text.rich(
+                                      TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text: 'Don’t have an acount? ',
+                                            style: TextStyle(
+                                              color: Color(0xFF666666),
+                                              fontSize: 16,
+                                              fontFamily: 'Poppins',
+                                              fontWeight: FontWeight.w400,
+                                              height: 0,
+                                            ),
+                                          ),
+                                          TextSpan(
+                                            text: 'Sign up  ',
+                                            style: TextStyle(
+                                              color: Color(0xFF111111),
+                                              fontSize: 16,
+                                              fontFamily: 'Poppins',
+                                              fontWeight: FontWeight.w500,
+                                              decoration: TextDecoration.underline,
+                                              height: 0,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ))
                               ],
                             ),
                           ),
