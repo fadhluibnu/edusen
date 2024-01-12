@@ -2,6 +2,13 @@
 
 Edusen merupakan sebuah platform yang membantu edukasi khususnya kaum disabilitas sensorik.
 
+## Tech Stack
+
+- Dart
+- Flutter
+- Firebase
+- Google Cloud Platform
+
 ## Preview
 
 - **Login Page**
