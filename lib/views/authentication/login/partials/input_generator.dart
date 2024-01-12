@@ -28,10 +28,10 @@ class InputGeneratorState extends State<InputGenerator> {
         padding: const EdgeInsets.only(top: 32),
         child:
             Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-          const Padding(
+          Padding(
             padding: EdgeInsets.only(bottom: 7),
             child: Text(
-              "widget.inputLabel",
+              widget.inputLabel,
               textAlign: TextAlign.start,
               style: TextStyle(
                 color: Color(0xFF666666),

@@ -1,6 +1,11 @@
+import 'package:edusen/views/authentication/register.dart';
+import 'package:edusen/views/route/push_and_back.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
+  static const String route = '/login';
+
   const LoginPage({super.key});
 
   @override
@@ -8,12 +13,13 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "Login Page",
-      home: Scaffold(
+    return Title(
+      title: "Login | Edusen",
+      color: Colors.blue,
+      child: Scaffold(
         body: Container(
           height: double.infinity,
           width: double.infinity,
@@ -91,8 +97,8 @@ class _LoginPageState extends State<LoginPage> {
                                                 top: 5,
                                                 bottom: 5),
                                             child: const TextField(
-                                              cursorColor: Color.fromARGB(
-                                                  255, 82, 82, 82),
+                                              cursorColor:
+                                                  Color.fromARGB(255, 82, 82, 82),
                                               style: TextStyle(
                                                 color: Color(0xFF666666),
                                                 fontSize: 16,
@@ -100,24 +106,19 @@ class _LoginPageState extends State<LoginPage> {
                                                 fontWeight: FontWeight.w400,
                                               ),
                                               decoration: InputDecoration(
-                                                contentPadding:
-                                                    EdgeInsets.all(0),
+                                                contentPadding: EdgeInsets.all(0),
                                                 filled: true,
                                                 fillColor: Colors.transparent,
                                                 hoverColor: Colors.transparent,
                                                 hintText: "Email",
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: Colors
-                                                                .transparent,
-                                                            width: 0)),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: Colors
-                                                                .transparent,
-                                                            width: 0)),
+                                                enabledBorder: OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                        color: Colors.transparent,
+                                                        width: 0)),
+                                                focusedBorder: OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                        color: Colors.transparent,
+                                                        width: 0)),
                                               ),
                                             ),
                                           )
@@ -153,8 +154,8 @@ class _LoginPageState extends State<LoginPage> {
                                                 top: 5,
                                                 bottom: 5),
                                             child: const TextField(
-                                              cursorColor: Color.fromARGB(
-                                                  255, 82, 82, 82),
+                                              cursorColor:
+                                                  Color.fromARGB(255, 82, 82, 82),
                                               style: TextStyle(
                                                 color: Color.fromARGB(
                                                     255, 82, 82, 82),
@@ -162,49 +163,47 @@ class _LoginPageState extends State<LoginPage> {
                                                 fontFamily: "Poppins",
                                               ),
                                               decoration: InputDecoration(
-                                                contentPadding:
-                                                    EdgeInsets.all(0),
+                                                contentPadding: EdgeInsets.all(0),
                                                 //   filled: true,
                                                 //   fillColor: Colors.transparent,
                                                 //   hoverColor: Colors.transparent,
                                                 hintText: "Password",
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: Colors
-                                                                .transparent,
-                                                            width: 0)),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: Colors
-                                                                .transparent,
-                                                            width: 0)),
+                                                enabledBorder: OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                        color: Colors.transparent,
+                                                        width: 0)),
+                                                focusedBorder: OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                        color: Colors.transparent,
+                                                        width: 0)),
                                               ),
                                             ),
                                           )
                                         ])),
                                 const Padding(
-                                  padding: EdgeInsets.only(top: 8),
-                                  child: Text(
-                                    'Forget your password',
-                                    style: TextStyle(
-                                      color: Color(0xFF111111),
-                                      fontSize: 16,
-                                      fontFamily: "Poppins",
-                                      fontWeight: FontWeight.w500,
-                                      decoration: TextDecoration.underline,
-                                      height: 0,
-                                    ),
-                                  )
-                                ),
+                                    padding: EdgeInsets.only(top: 8),
+                                    child: Text(
+                                      'Forget your password',
+                                      style: TextStyle(
+                                        color: Color(0xFF111111),
+                                        fontSize: 16,
+                                        fontFamily: "Poppins",
+                                        fontWeight: FontWeight.w500,
+                                        decoration: TextDecoration.underline,
+                                        height: 0,
+                                      ),
+                                    )),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 32),
                                   child: ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(context,
+                                            MaterialPageRoute(builder: (context) {
+                                          return RegisterPage();
+                                        }));
+                                      },
                                       style: ButtonStyle(
-                                          elevation:
-                                              MaterialStateProperty.all(0),
+                                          elevation: MaterialStateProperty.all(0),
                                           backgroundColor:
                                               MaterialStateProperty.all(
                                                   const Color.fromRGBO(
@@ -224,12 +223,12 @@ class _LoginPageState extends State<LoginPage> {
                                         ),
                                       )),
                                 ),
-                                const Padding(
-                                    padding: EdgeInsets.only(top: 32),
+                                Padding(
+                                    padding: const EdgeInsets.only(top: 32),
                                     child: Text.rich(
                                       TextSpan(
-                                        children: [
-                                          TextSpan(
+                                        children: <InlineSpan>[
+                                          const TextSpan(
                                             text: 'Don’t have an acount? ',
                                             style: TextStyle(
                                               color: Color(0xFF666666),
@@ -240,16 +239,24 @@ class _LoginPageState extends State<LoginPage> {
                                             ),
                                           ),
                                           TextSpan(
-                                            text: 'Sign up  ',
-                                            style: TextStyle(
-                                              color: Color(0xFF111111),
-                                              fontSize: 16,
-                                              fontFamily: 'Poppins',
-                                              fontWeight: FontWeight.w500,
-                                              decoration: TextDecoration.underline,
-                                              height: 0,
-                                            ),
-                                          ),
+                                              text: 'Sign up  ',
+                                              style: const TextStyle(
+                                                color: Color(0xFF111111),
+                                                fontSize: 16,
+                                                fontFamily: 'Poppins',
+                                                fontWeight: FontWeight.w500,
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                height: 0,
+                                              ),
+                                              recognizer: TapGestureRecognizer()..onTap = () => Navigator.pushReplacementNamed(
+                                                context, 
+                                                RegisterPage.route,
+                                                arguments: {
+                                                  'route' : LoginPage.route,
+                                                }
+                                              )),
+                                              
                                         ],
                                       ),
                                       textAlign: TextAlign.center,
