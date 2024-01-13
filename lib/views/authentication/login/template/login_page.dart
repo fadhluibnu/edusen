@@ -1,4 +1,4 @@
-import 'package:edusen/views/authentication/register.dart';
+import 'package:edusen/views/authentication/register/register.dart';
 import 'package:edusen/views/route/push_and_back.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +13,14 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  double getHeight(BuildContext context) {
+    // print(MediaQuery.of(context).size.height);
+    return MediaQuery.of(context).size.height;
+  }
+
+  double getWidth(BuildContext context) {
+    return MediaQuery.of(context).size.width;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +31,86 @@ class _LoginPageState extends State<LoginPage> {
         body: Container(
           height: double.infinity,
           width: double.infinity,
-          color: const Color.fromARGB(255, 76, 76, 255),
+          color: Color(0xFF8211FB),
           child: Stack(
             children: [
+              Positioned(
+                  left: 212,
+                  top: -176,
+                  child: Container(
+                    width: 352.38,
+                    height: 352.38,
+                    decoration: ShapeDecoration(
+                      color: Colors.white.withOpacity(0.25),
+                      shape: OvalBorder(),
+                    ),
+                  )),
+              Positioned(
+                  left: 32.8,
+                  top: -111,
+                  child: Container(
+                    width: 223.97,
+                    height: 223.97,
+                    decoration: ShapeDecoration(
+                      color: Colors.white.withOpacity(0.25),
+                      shape: OvalBorder(),
+                    ),
+                  )),
+              Positioned(
+                  top: -64,
+                  right: 114,
+                  child: Container(
+                    width: 223.97,
+                    height: 223.97,
+                    decoration: ShapeDecoration(
+                      color: Colors.white.withOpacity(0.25),
+                      shape: OvalBorder(),
+                    ),
+                  )),
+              Positioned(
+                  top: -129,
+                  right: -194,
+                  child: Container(
+                    width: 352.38,
+                    height: 352.38,
+                    decoration: ShapeDecoration(
+                      color: Colors.white.withOpacity(0.25),
+                      shape: OvalBorder(),
+                    ),
+                  )),
+              Positioned(
+                  top: 390.0,
+                  left: -154.0,
+                  child: Container(
+                    width: 352.38,
+                    height: 352.38,
+                    decoration: ShapeDecoration(
+                      color: Colors.white.withOpacity(0.25),
+                      shape: OvalBorder(),
+                    ),
+                  )),
+              Positioned(
+                  right: 341,
+                  bottom: -259,
+                  child: Container(
+                    width: 352.38,
+                    height: 352.38,
+                    decoration: ShapeDecoration(
+                      color: Colors.white.withOpacity(0.25),
+                      shape: OvalBorder(),
+                    ),
+                  )),
+              Positioned(
+                  right: -165,
+                  bottom: -285,
+                  child: Container(
+                    width: 597.26,
+                    height: 597.26,
+                    decoration: ShapeDecoration(
+                      color: Colors.white.withOpacity(0.25),
+                      shape: OvalBorder(),
+                    ),
+                  )),
               Center(
                 child: IntrinsicHeight(
                   child: Container(
@@ -35,6 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                       color: Colors.white,
                     ),
                     child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Flexible(
                           flex: 1,
@@ -97,8 +183,8 @@ class _LoginPageState extends State<LoginPage> {
                                                 top: 5,
                                                 bottom: 5),
                                             child: const TextField(
-                                              cursorColor:
-                                                  Color.fromARGB(255, 82, 82, 82),
+                                              cursorColor: Color.fromARGB(
+                                                  255, 82, 82, 82),
                                               style: TextStyle(
                                                 color: Color(0xFF666666),
                                                 fontSize: 16,
@@ -106,19 +192,24 @@ class _LoginPageState extends State<LoginPage> {
                                                 fontWeight: FontWeight.w400,
                                               ),
                                               decoration: InputDecoration(
-                                                contentPadding: EdgeInsets.all(0),
+                                                contentPadding:
+                                                    EdgeInsets.all(0),
                                                 filled: true,
                                                 fillColor: Colors.transparent,
                                                 hoverColor: Colors.transparent,
                                                 hintText: "Email",
-                                                enabledBorder: OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                        color: Colors.transparent,
-                                                        width: 0)),
-                                                focusedBorder: OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                        color: Colors.transparent,
-                                                        width: 0)),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: Colors
+                                                                .transparent,
+                                                            width: 0)),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: Colors
+                                                                .transparent,
+                                                            width: 0)),
                                               ),
                                             ),
                                           )
@@ -154,8 +245,8 @@ class _LoginPageState extends State<LoginPage> {
                                                 top: 5,
                                                 bottom: 5),
                                             child: const TextField(
-                                              cursorColor:
-                                                  Color.fromARGB(255, 82, 82, 82),
+                                              cursorColor: Color.fromARGB(
+                                                  255, 82, 82, 82),
                                               style: TextStyle(
                                                 color: Color.fromARGB(
                                                     255, 82, 82, 82),
@@ -163,19 +254,24 @@ class _LoginPageState extends State<LoginPage> {
                                                 fontFamily: "Poppins",
                                               ),
                                               decoration: InputDecoration(
-                                                contentPadding: EdgeInsets.all(0),
+                                                contentPadding:
+                                                    EdgeInsets.all(0),
                                                 //   filled: true,
                                                 //   fillColor: Colors.transparent,
                                                 //   hoverColor: Colors.transparent,
                                                 hintText: "Password",
-                                                enabledBorder: OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                        color: Colors.transparent,
-                                                        width: 0)),
-                                                focusedBorder: OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                        color: Colors.transparent,
-                                                        width: 0)),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: Colors
+                                                                .transparent,
+                                                            width: 0)),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color: Colors
+                                                                .transparent,
+                                                            width: 0)),
                                               ),
                                             ),
                                           )
@@ -198,12 +294,14 @@ class _LoginPageState extends State<LoginPage> {
                                   child: ElevatedButton(
                                       onPressed: () {
                                         Navigator.push(context,
-                                            MaterialPageRoute(builder: (context) {
+                                            MaterialPageRoute(
+                                                builder: (context) {
                                           return RegisterPage();
                                         }));
                                       },
                                       style: ButtonStyle(
-                                          elevation: MaterialStateProperty.all(0),
+                                          elevation:
+                                              MaterialStateProperty.all(0),
                                           backgroundColor:
                                               MaterialStateProperty.all(
                                                   const Color.fromRGBO(
@@ -249,14 +347,15 @@ class _LoginPageState extends State<LoginPage> {
                                                     TextDecoration.underline,
                                                 height: 0,
                                               ),
-                                              recognizer: TapGestureRecognizer()..onTap = () => Navigator.pushReplacementNamed(
-                                                context, 
-                                                RegisterPage.route,
-                                                arguments: {
-                                                  'route' : LoginPage.route,
-                                                }
-                                              )),
-                                              
+                                              recognizer: TapGestureRecognizer()
+                                                ..onTap = () => Navigator
+                                                        .pushReplacementNamed(
+                                                            context,
+                                                            RegisterPage.route,
+                                                            arguments: {
+                                                          'route':
+                                                              LoginPage.route,
+                                                        })),
                                         ],
                                       ),
                                       textAlign: TextAlign.center,
@@ -267,7 +366,52 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         Flexible(
                             flex: 1,
-                            child: Container(height: 5, color: Colors.black))
+                            child: Container(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                Center(
+                                  child: Container(
+                                    width: 326,
+                                    height: 366,
+                                    child: Image(
+                                      image: AssetImage(
+                                          "../../../../../assets/image/image120.jpg"),
+                                      fit: BoxFit.contain,
+                                      repeat: ImageRepeat.repeatX,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 40),
+                                  child: Text(
+                                    'Log in with Face',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Color(0xFF333333),
+                                      fontSize: 40,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w600,
+                                      height: 0,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 4),
+                                  child: Text(
+                                    'position your face in front of the camera',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Color(0xFF666666),
+                                      fontSize: 22,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w400,
+                                      height: 0,
+                                    ),
+                                  ),
+                                )
+                              ]),
+                            ))
                       ],
                     ),
                   ),

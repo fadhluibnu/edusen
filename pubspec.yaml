@@ -88,6 +88,11 @@ flutter:
   #         weight: 700
   #
   fonts:
+    - family: MyFlutterApp
+      fonts:
+        - asset: assets/icons/MyFlutterApp.ttf
+        - asset: assets/icons/flashon/fonts/MyFlutterApp.ttf
+        
     - family: Poppins
       fonts:
         - asset: fonts/poppins/PoppinsThin.ttf
