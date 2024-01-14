@@ -375,8 +375,7 @@ class _LoginPageState extends State<LoginPage> {
                                     width: 326,
                                     height: 366,
                                     child: Image(
-                                      image: AssetImage(
-                                          "../../../../../assets/image/image120.jpg"),
+                                      image: AssetImage('assets/images/image120.jpg'),
                                       fit: BoxFit.contain,
                                       repeat: ImageRepeat.repeatX,
                                     ),

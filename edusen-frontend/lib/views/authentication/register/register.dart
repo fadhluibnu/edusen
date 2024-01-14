@@ -1,6 +1,9 @@
 import 'package:edusen/my_flutter_app_icons.dart';
 import 'package:edusen/views/authentication/login/template/login_page.dart';
+import 'package:edusen/views/authentication/register/partials/register_step_one.dart';
+import 'package:edusen/views/authentication/register/partials/register_step_two.dart';
 import 'package:edusen/views/route/push_and_back.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -13,6 +16,17 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  int step = 1;
+  void SubmitStepOne() {
+    setState(() {
+      step = step + 1;
+    });
+  }
+
+  void SubmitStepTwo() {
+    print("FInish Redirect");
+  }
+
   @override
   Widget build(BuildContext context) {
     final pushAndBack = (ModalRoute.of(context)?.settings.arguments ??
@@ -39,6 +53,7 @@ class _RegisterPageState extends State<RegisterPage> {
         color: Colors.blue,
         child: Scaffold(
           body: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Stack(
                 children: [
@@ -186,7 +201,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                           width: 20,
                                           height: 20,
                                           decoration: ShapeDecoration(
-                                            color: Color(0xFF333333),
+                                            color: step == 1 ? Color(0xFF333333) : Color(0xFF4C4CFF),
                                             shape: OvalBorder(),
                                           ),
                                           child: Center(
@@ -196,7 +211,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                               style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 12,
-                                                fontFamily: 'Avenir',
+                                                fontFamily: 'Poppins',
                                                 fontWeight: FontWeight.w500,
                                                 height: 0,
                                               ),
@@ -207,7 +222,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                           'Create Your Account',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
-                                            color: Color(0xFF333333),
+                                            color: step == 1 ? Color(0xFF333333) : Color(0xFF4C4CFF),
                                             fontSize: 15,
                                             fontFamily: 'Poppins',
                                             fontWeight: FontWeight.w400,
@@ -222,8 +237,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                           width: 20,
                                           height: 20,
                                           decoration: ShapeDecoration(
-                                            color: Color.fromARGB(
-                                                255, 168, 168, 168),
+                                            color: step == 2 ? Color(0xFF333333) : Color.fromARGB(255, 168, 168, 168),
                                             shape: OvalBorder(),
                                           ),
                                           child: Center(
@@ -233,7 +247,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                               style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 12,
-                                                fontFamily: 'Avenir',
+                                                fontFamily: 'Poppins',
                                                 fontWeight: FontWeight.w500,
                                                 height: 0,
                                               ),
@@ -244,7 +258,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                           'Scan Your Face',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
-                                            color: Color(0x7F333333),
+                                            color: step == 2 ? Color(0xFF333333) : Color(0x7F333333),
                                             fontSize: 15,
                                             fontFamily: 'Poppins',
                                             fontWeight: FontWeight.w400,
@@ -258,376 +272,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               ],
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 24),
-                            child: Text(
-                              'Create an account',
-                              style: TextStyle(
-                                color: Color(0xFF333333),
-                                fontSize: 32,
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w500,
-                                height: 0,
-                              ),
-                            ),
-                          ),
-                          Text.rich(
-                            TextSpan(
-                              children: [
-                                TextSpan(
-                                  text: 'Already have an ccount?',
-                                  style: TextStyle(
-                                    color: Color(0xFF333333),
-                                    fontSize: 16,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w400,
-                                    height: 0,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: ' Log in',
-                                  style: TextStyle(
-                                    color: Color(0xFF111111),
-                                    fontSize: 16,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w400,
-                                    decoration: TextDecoration.underline,
-                                    height: 0,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                              padding: const EdgeInsets.only(top: 32),
-                              child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    const Padding(
-                                      padding: EdgeInsets.only(bottom: 7),
-                                      child: Text(
-                                        'Username',
-                                        textAlign: TextAlign.start,
-                                        style: TextStyle(
-                                          color: Color(0xFF666666),
-                                          fontSize: 16,
-                                          fontFamily: "Poppins",
-                                          fontWeight: FontWeight.w400,
-                                          height: 0,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                          border: Border.all(
-                                              color: const Color.fromARGB(
-                                                  76, 102, 102, 102))),
-                                      padding: const EdgeInsets.only(
-                                          left: 10,
-                                          right: 10,
-                                          top: 5,
-                                          bottom: 5),
-                                      child: const TextField(
-                                        cursorColor:
-                                            Color.fromARGB(255, 82, 82, 82),
-                                        style: TextStyle(
-                                          color: Color(0xFF666666),
-                                          fontSize: 16,
-                                          fontFamily: "Poppins",
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                        decoration: InputDecoration(
-                                          contentPadding: EdgeInsets.all(0),
-                                          filled: true,
-                                          fillColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          hintText: "Username",
-                                          enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                  color: Colors.transparent,
-                                                  width: 0)),
-                                          focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                  color: Colors.transparent,
-                                                  width: 0)),
-                                        ),
-                                      ),
-                                    )
-                                  ])),
-                          Container(
-                              padding: const EdgeInsets.only(top: 24),
-                              child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    const Padding(
-                                      padding: EdgeInsets.only(bottom: 7),
-                                      child: Text(
-                                        'Email',
-                                        textAlign: TextAlign.start,
-                                        style: TextStyle(
-                                          color: Color(0xFF666666),
-                                          fontSize: 16,
-                                          fontFamily: "Poppins",
-                                          fontWeight: FontWeight.w400,
-                                          height: 0,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                          border: Border.all(
-                                              color: const Color.fromARGB(
-                                                  76, 102, 102, 102))),
-                                      padding: const EdgeInsets.only(
-                                          left: 10,
-                                          right: 10,
-                                          top: 5,
-                                          bottom: 5),
-                                      child: const TextField(
-                                        cursorColor:
-                                            Color.fromARGB(255, 82, 82, 82),
-                                        style: TextStyle(
-                                          color: Color(0xFF666666),
-                                          fontSize: 16,
-                                          fontFamily: "Poppins",
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                        decoration: InputDecoration(
-                                          contentPadding: EdgeInsets.all(0),
-                                          filled: true,
-                                          fillColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          hintText: "Email",
-                                          enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                  color: Colors.transparent,
-                                                  width: 0)),
-                                          focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                  color: Colors.transparent,
-                                                  width: 0)),
-                                        ),
-                                      ),
-                                    )
-                                  ])),
-                          Container(
-                              padding: const EdgeInsets.only(top: 24),
-                              child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(bottom: 7),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            'Password',
-                                            textAlign: TextAlign.start,
-                                            style: TextStyle(
-                                              color: Color(0xFF666666),
-                                              fontSize: 16,
-                                              fontFamily: "Poppins",
-                                              fontWeight: FontWeight.w400,
-                                              height: 0,
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              print("hide");
-                                            },
-                                            child:
-                                                Text.rich(TextSpan(children: [
-                                              WidgetSpan(
-                                                  child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 8),
-                                                child: Icon(
-                                                  MyFlutterApp.eye_closed,
-                                                  size: 14,
-                                                  color: Color(0xCC666666),
-                                                ),
-                                              )),
-                                              TextSpan(
-                                                text: 'Hide',
-                                                style: TextStyle(
-                                                  color: Color(0xCC666666),
-                                                  fontSize: 18,
-                                                  fontFamily: 'Poppins',
-                                                  fontWeight: FontWeight.w400,
-                                                  height: 0,
-                                                ),
-                                              )
-                                            ])),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                          border: Border.all(
-                                              color: const Color.fromARGB(
-                                                  76, 102, 102, 102))),
-                                      padding: const EdgeInsets.only(
-                                          left: 10,
-                                          right: 10,
-                                          top: 5,
-                                          bottom: 5),
-                                      child: const TextField(
-                                        cursorColor:
-                                            Color.fromARGB(255, 82, 82, 82),
-                                        style: TextStyle(
-                                          color: Color(0xFF666666),
-                                          fontSize: 16,
-                                          fontFamily: "Poppins",
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                        decoration: InputDecoration(
-                                          contentPadding: EdgeInsets.all(0),
-                                          filled: true,
-                                          fillColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          hintText: "Password",
-                                          enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                  color: Colors.transparent,
-                                                  width: 0)),
-                                          focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                  color: Colors.transparent,
-                                                  width: 0)),
-                                        ),
-                                      ),
-                                    ),
-                                    Text(
-                                      'Use 8 or more characters with a mix of letters, numbers & symbols',
-                                      style: TextStyle(
-                                        color: Color(0xFF666666),
-                                        fontSize: 14,
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w400,
-                                        height: 0,
-                                      ),
-                                    )
-                                  ])),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 32),
-                            child: Text.rich(
-                              TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text:
-                                        'By creating an account, you agree to our\n',
-                                    style: TextStyle(
-                                      color: Color(0xFF666666),
-                                      fontSize: 16,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w400,
-                                      height: 0,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: 'Terms of use',
-                                    style: TextStyle(
-                                      color: Color(0xFF111111),
-                                      fontSize: 16,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w400,
-                                      decoration: TextDecoration.underline,
-                                      height: 0,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: ' and ',
-                                    style: TextStyle(
-                                      color: Color(0xFF666666),
-                                      fontSize: 16,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w400,
-                                      height: 0,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: 'Privacy Policy',
-                                    style: TextStyle(
-                                      color: Color(0xFF111111),
-                                      fontSize: 16,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w400,
-                                      decoration: TextDecoration.underline,
-                                      height: 0,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Padding(
-                              padding: EdgeInsets.only(top: 32),
-                              child: Container(
-                                  width: 270,
-                                  child: ElevatedButton(
-                                    onPressed: () {},
-                                    style: ButtonStyle(
-                                        elevation: MaterialStateProperty.all(0),
-                                        backgroundColor:
-                                            MaterialStateProperty.all(
-                                                const Color.fromRGBO(
-                                                    0, 0, 0, 0.25))),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(15),
-                                      child: Text(
-                                        'Next',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 22,
-                                          fontFamily: 'Poppins',
-                                          fontWeight: FontWeight.w500,
-                                          height: 0,
-                                        ),
-                                      ),
-                                    ),
-                                  ))),
-                          Padding(
-                            padding: EdgeInsets.only(top: 16),
-                            child: Text.rich(
-                              TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: 'Already have an ccount?',
-                                    style: TextStyle(
-                                      color: Color(0xFF333333),
-                                      fontSize: 16,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w400,
-                                      height: 0,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: 'Log in  ',
-                                    style: TextStyle(
-                                      color: Color(0xFF111111),
-                                      fontSize: 16,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w400,
-                                      decoration: TextDecoration.underline,
-                                      height: 0,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )
+                          step == 1 ? RegisterStepOne(step: step, nextStep: SubmitStepOne,) : RegisterStepTwo()
                         ]),
                   ),
                 ),
