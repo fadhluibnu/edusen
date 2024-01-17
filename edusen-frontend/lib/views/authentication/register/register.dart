@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:edusen/my_flutter_app_icons.dart';
 import 'package:edusen/views/authentication/login/template/login_page.dart';
 import 'package:edusen/views/authentication/register/partials/register_step_one.dart';
@@ -16,6 +17,42 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  TextEditingController name_controller = TextEditingController();
+  TextEditingController email_controller = TextEditingController();
+  TextEditingController password_controller = TextEditingController();
+
+  List<CameraDescription>? cameras; //list out the camera available
+  CameraController? cameraController; //controller for camera
+  XFile? image; //for captured image
+
+  @override
+  void initState() {
+    loadCamera();
+    super.initState();
+  }
+
+  loadCamera() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    try {
+      cameras = await availableCameras();
+      if (cameras != null) {
+        cameraController = CameraController(cameras![0], ResolutionPreset.max);
+        //cameras[0] = first camera, change to 1 to another camera
+
+        cameraController!.initialize().then((_) {
+          if (!mounted) {
+            return;
+          }
+          setState(() {});
+        });
+      } else {
+        print("NO any camera found");
+      }
+    } on CameraException catch (e) {
+       print("NO any camera found");
+    }
+  }
+
   int step = 1;
   void SubmitStepOne() {
     setState(() {
@@ -25,6 +62,10 @@ class _RegisterPageState extends State<RegisterPage> {
 
   void SubmitStepTwo() {
     print("FInish Redirect");
+  }
+
+  void submitForm() {
+    print(name_controller.text);
   }
 
   @override
@@ -201,7 +242,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                           width: 20,
                                           height: 20,
                                           decoration: ShapeDecoration(
-                                            color: step == 1 ? Color(0xFF333333) : Color(0xFF4C4CFF),
+                                            color: step == 1
+                                                ? Color(0xFF333333)
+                                                : Color(0xFF4C4CFF),
                                             shape: OvalBorder(),
                                           ),
                                           child: Center(
@@ -222,7 +265,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                           'Create Your Account',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
-                                            color: step == 1 ? Color(0xFF333333) : Color(0xFF4C4CFF),
+                                            color: step == 1
+                                                ? Color(0xFF333333)
+                                                : Color(0xFF4C4CFF),
                                             fontSize: 15,
                                             fontFamily: 'Poppins',
                                             fontWeight: FontWeight.w400,
@@ -237,7 +282,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                           width: 20,
                                           height: 20,
                                           decoration: ShapeDecoration(
-                                            color: step == 2 ? Color(0xFF333333) : Color.fromARGB(255, 168, 168, 168),
+                                            color: step == 2
+                                                ? Color(0xFF333333)
+                                                : Color.fromARGB(
+                                                    255, 168, 168, 168),
                                             shape: OvalBorder(),
                                           ),
                                           child: Center(
@@ -258,7 +306,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                           'Scan Your Face',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
-                                            color: step == 2 ? Color(0xFF333333) : Color(0x7F333333),
+                                            color: step == 2
+                                                ? Color(0xFF333333)
+                                                : Color(0x7F333333),
                                             fontSize: 15,
                                             fontFamily: 'Poppins',
                                             fontWeight: FontWeight.w400,
@@ -272,7 +322,18 @@ class _RegisterPageState extends State<RegisterPage> {
                               ],
                             ),
                           ),
-                          step == 1 ? RegisterStepOne(step: step, nextStep: SubmitStepOne,) : RegisterStepTwo()
+                          step == 1
+                              ? RegisterStepOne(
+                                  step: step,
+                                  nextStep: SubmitStepOne,
+                                  name_controller: name_controller,
+                                  email_controller: email_controller,
+                                  password_controller: password_controller,
+                                )
+                              : RegisterStepTwo(
+                                  submitForm: submitForm,
+                                  cameraController: cameraController,
+                                )
                         ]),
                   ),
                 ),

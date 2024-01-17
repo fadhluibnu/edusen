@@ -4,9 +4,12 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class RegisterStepOne extends StatefulWidget {
-  const RegisterStepOne({super.key, this.step, this.nextStep});
+  const RegisterStepOne({super.key, this.step, this.nextStep, this.name_controller, this.email_controller, this.password_controller});
   final Function? nextStep;
   final int? step;
+  final TextEditingController? name_controller;
+  final TextEditingController? email_controller;
+  final TextEditingController? password_controller;
 
   @override
   State<RegisterStepOne> createState() => _RegisterStepOneState();
@@ -16,12 +19,12 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 24),
+      padding: EdgeInsets.only(top: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 24),
+            padding: EdgeInsets.only(top: 24),
             child: Text(
               'Create an account',
               style: TextStyle(
@@ -65,14 +68,14 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
             ),
           ),
           Container(
-              padding: const EdgeInsets.only(top: 32),
+              padding: EdgeInsets.only(top: 32),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.only(bottom: 7),
                       child: Text(
-                        'Username',
+                        'Name',
                         textAlign: TextAlign.start,
                         style: TextStyle(
                           color: Color(0xFF666666),
@@ -87,10 +90,14 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
-                              color: const Color.fromARGB(76, 102, 102, 102))),
-                      padding: const EdgeInsets.only(
+                              color: Color.fromARGB(76, 102, 102, 102))),
+                      padding: EdgeInsets.only(
                           left: 10, right: 10, top: 5, bottom: 5),
-                      child: const TextField(
+                      child: TextField(
+                        controller: widget.name_controller,
+                        onChanged: (value){
+                          // print(widget.name_controller?.text);
+                        },
                         cursorColor: Color.fromARGB(255, 82, 82, 82),
                         style: TextStyle(
                           color: Color(0xFF666666),
@@ -115,11 +122,11 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                     )
                   ])),
           Container(
-              padding: const EdgeInsets.only(top: 24),
+              padding: EdgeInsets.only(top: 24),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const Padding(
+                   Padding(
                       padding: EdgeInsets.only(bottom: 7),
                       child: Text(
                         'Email',
@@ -137,10 +144,14 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
-                              color: const Color.fromARGB(76, 102, 102, 102))),
-                      padding: const EdgeInsets.only(
+                              color: Color.fromARGB(76, 102, 102, 102))),
+                      padding: EdgeInsets.only(
                           left: 10, right: 10, top: 5, bottom: 5),
-                      child: const TextField(
+                      child: TextField(
+                        controller: widget.email_controller,
+                        onChanged: (value){
+                          // print(widget.email_controller?.text);
+                        },
                         cursorColor: Color.fromARGB(255, 82, 82, 82),
                         style: TextStyle(
                           color: Color(0xFF666666),
@@ -218,10 +229,14 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
-                              color: const Color.fromARGB(76, 102, 102, 102))),
-                      padding: const EdgeInsets.only(
+                              color: Color.fromARGB(76, 102, 102, 102))),
+                      padding: EdgeInsets.only(
                           left: 10, right: 10, top: 5, bottom: 5),
-                      child: const TextField(
+                      child: TextField(
+                        controller: widget.password_controller,
+                        onChanged: (value){
+                          // print(widget.password_controller?.text);
+                        },
                         cursorColor: Color.fromARGB(255, 82, 82, 82),
                         style: TextStyle(
                           color: Color(0xFF666666),

@@ -10,11 +10,25 @@ const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
 
 let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
+// if (config.use_env_variable) {
+//   sequelize = new Sequelize(process.env[config.use_env_variable], config);
+// } else {
+  // sequelize = new Sequelize(config.database, config.username, config.password, config);
+  sequelize = new Sequelize("db_edusen", "edusen-user", "edusen-user", {
+    host: `/cloudsql/edusen-server:us-central1:edusen-server-gdsc`,
+    dialect: 'mysql',
+    pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000
+    },
+    dialectOptions: {
+        socketPath: '/cloudsql/edusen-server:us-central1:edusen-server-gdsc',
+        // socketPath: Sequelize.Utils.format('/cloudsql/%s','edusen-server:us-central1:edusen-server-gdsc'),
+    },
+  });
+// }
 
 fs
   .readdirSync(__dirname)

@@ -1,0 +1,7 @@
+runtime: nodejs18
+handlers:
+- url: /.*
+  script: main.js
+
+env_variables:
+  INSTANCE_CONNECTION_NAME: "edusen-server-gdsc"

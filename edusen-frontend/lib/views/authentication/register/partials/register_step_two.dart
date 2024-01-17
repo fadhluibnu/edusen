@@ -1,9 +1,13 @@
+import 'package:camera/camera.dart';
 import 'package:edusen/views/authentication/login/template/login_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class RegisterStepTwo extends StatefulWidget {
-  const RegisterStepTwo({super.key});
+  const RegisterStepTwo({super.key, this.submitForm, this.cameraController});
+
+  final Function? submitForm;
+  final CameraController? cameraController;
 
   @override
   State<RegisterStepTwo> createState() => _RegisterStepTwoState();
@@ -61,18 +65,25 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                 ],
               ),
             ),
-            Padding(
-                padding: EdgeInsets.only(top: 32),
-                child: Center(
-                  child: SizedBox(
-                    width: 326,
-                    height: 366,
-                    child: Image(
-                      image: AssetImage("assets/images/image120.jpg"),
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                )),
+            widget.cameraController == null
+                ? Center(child: Text("Loading Camera..."))
+                : !widget.cameraController!.value.isInitialized
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : CameraPreview(widget.cameraController!),
+            // Padding(
+            //     padding: EdgeInsets.only(top: 32),
+            //     child: Center(
+            //       child: SizedBox(
+            //         width: 326,
+            //         height: 366,
+            //         child: Image(
+            //           image: AssetImage("assets/images/image120.jpg"),
+            //           fit: BoxFit.contain,
+            //         ),
+            //       ),
+            //     )),
             Padding(
               padding: EdgeInsets.only(top: 24),
               child: Center(
@@ -105,7 +116,9 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                       splashColor: Color.fromRGBO(0, 0, 0,
                           0.5), //untuk mengganti animasi warna ketika di klik
                       borderRadius: BorderRadius.circular(50),
-                      onTap: () {},
+                      onTap: () {
+                        widget.submitForm?.call();
+                      },
                       child: Padding(
                         padding: const EdgeInsets.all(15),
                         child: Center(

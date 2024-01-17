@@ -10,11 +10,57 @@ const canvas = require('canvas')
 const {
     Canvas,
     Image,
+    loadImage,
+    createCanvas
 } = require("canvas");
 // const user = require('../models/user');
 faceapi.env.monkeyPatch({
     Canvas,
     Image
+})
+
+
+const Cloud = require('@google-cloud/storage')
+const path = require('path')
+const serviceKey = path.join(__dirname, './key.json')
+
+const { Storage } = Cloud
+const storage = new Storage({
+    keyFilename: serviceKey,
+    projectId: 'edusen-server',
+})
+
+const util = require('util')
+// const gc = require('./key.json')
+const bucket = storage.bucket('edusen-server.appspot.com') // should be your bucket name
+const { format } = util
+
+/**
+ *
+ * @param { File } object file object that will be uploaded
+ * @description - This function does the following
+ * - It uploads a file to the image bucket on Google Cloud
+ * - It accepts an object as an argument with the
+ *   "originalname" and "buffer" as keys
+ */
+
+const uploadImage = (file) => new Promise((resolve, reject) => {
+    const { originalname, buffer } = file
+
+    const blob = bucket.file(originalname.replace(/ /g, "_"))
+    const blobStream = blob.createWriteStream({
+        resumable: false
+    })
+    blobStream.on('finish', () => {
+        const publicUrl = format(
+            `https://storage.googleapis.com/edusen-server.appspot.com/${blob.name}`
+        )
+        resolve(publicUrl)
+    })
+        .on('error', () => {
+            reject(`Unable to upload image, something went wrong`)
+        })
+        .end(buffer)
 })
 
 async function generateToken(user) {
@@ -54,38 +100,47 @@ async function hashPassword(password) {
 }
 
 async function LoadModels() {
-    await faceapi.nets.faceRecognitionNet.loadFromDisk("./face_recognition/models");
-    await faceapi.nets.faceLandmark68Net.loadFromDisk("./face_recognition/models");
-    await faceapi.nets.ssdMobilenetv1.loadFromDisk("./face_recognition/models");
+    await faceapi.nets.faceRecognitionNet.loadFromDisk(__dirname + "/../face_recognition/models");
+    await faceapi.nets.faceLandmark68Net.loadFromDisk(__dirname + "/../face_recognition/models");
+    await faceapi.nets.ssdMobilenetv1.loadFromDisk(__dirname + "/../face_recognition/models");
 }
 async function uploadLabeledImages(images, label) {
     try {
         await LoadModels();
-        const img = await canvas.loadImage(images);
+        const img = await canvas.loadImage(images,'png');
         const descriptions = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor();
         const docId = await db.collection('FaceID').doc().id
         await db.collection('FaceID').doc(docId).set({
             label: label,
             descriptions: Array.from(descriptions.descriptor)
         });
-        return docId;
+        return {
+            status: true,
+            error: null,
+            data: docId
+        };
         // const float32 = new Float32Array(Object.values(descriptions.descriptor))
         // return new faceapi.LabeledFaceDescriptors(`${label}`, [float32]);
     } catch (error) {
         console.log(error.message)
-        return false;
+        return {
+            status: false,
+            error: error.message,
+            data: null
+        };
     }
 }
 exports.registrasi = async (req, res) => {
     const t = await MODELS.sequelize.transaction()
     try {
-        let faceStore = await uploadLabeledImages("./images/" + req.file.filename, req.body.email)
-        if (faceStore) {
+        const imageUrl = await uploadImage(req.file)
+        let faceStore = await uploadLabeledImages(imageUrl, req.body.email)
+        if (faceStore.status) {
             const user = await users.create({
                 name: req.body.name,
                 email: req.body.email,
                 password: await hashPassword(req.body.password),
-                faceID: faceStore
+                faceID: faceStore.data
             }, {
                 transaction: t
             });
@@ -104,7 +159,7 @@ exports.registrasi = async (req, res) => {
                 throw new Error
             }
         } else {
-            throw new Error
+            throw new Error(faceStore.error)
         }
 
     } catch (err) {
@@ -142,7 +197,8 @@ exports.loginWithFaceID = async (req, res) => {
         }
 
         const faceMatcher = new faceapi.FaceMatcher(FaceID, 0.6);
-        const img = await canvas.loadImage("./images/" + req.file.filename);
+        const imageUrl = await uploadImage(req.file)
+        const img = await canvas.loadImage(imageUrl);
         let temp = faceapi.createCanvasFromMedia(img);
 
         // Process the image for the model

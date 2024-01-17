@@ -2,18 +2,28 @@ const userController = require("../controller/user-controller")
 const router = require('express').Router()
 const multer = require("multer");
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'images/')
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now() + '.jpg')
-    }
-});
+const multerMid = multer({
+    storage: multer.memoryStorage(),
+})
 
-const upload = multer({ storage: storage });
+// router.post('/uploads', multerMid.single('faceID'), async (req, res, next) => {
+//     try {
+//         const myFile = req.file
+//         const imageUrl = await uploadImage(myFile)
 
-router.post('/register', upload.single('faceID'), userController.registrasi)
-router.post('/login-with-face-id', upload.single('faceID'), userController.loginWithFaceID)
+//         res
+//             .status(200)
+//             .json({
+//                 message: "Upload was successful",
+//                 data: imageUrl
+//             })
+//     } catch (error) {
+//         res.status(500).json(error.message)
+//     }
+// })
+
+
+router.post('/register', multerMid.single('faceID'), userController.registrasi)
+router.post('/login-with-face-id', multerMid.single('faceID'), userController.loginWithFaceID)
 
 module.exports = router

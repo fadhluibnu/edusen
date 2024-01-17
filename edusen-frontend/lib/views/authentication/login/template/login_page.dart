@@ -2,11 +2,13 @@ import 'package:edusen/views/authentication/register/register.dart';
 import 'package:edusen/views/route/push_and_back.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:camera/camera.dart';
 
 class LoginPage extends StatefulWidget {
   static const String route = '/login';
 
-  const LoginPage({super.key});
+  const LoginPage({super.key, required this.cameras});
+  final List<CameraDescription> cameras;
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -21,6 +23,43 @@ class _LoginPageState extends State<LoginPage> {
   double getWidth(BuildContext context) {
     return MediaQuery.of(context).size.width;
   }
+
+  late CameraController _controller;
+  late Future<void> _initializeControllerFuture;
+  bool camera = false;
+
+  void activeCamera() {
+    setState(() {
+      camera = true;
+    });
+    _controller = CameraController(
+      widget.cameras[0],
+      ResolutionPreset.medium,
+    );
+
+    _initializeControllerFuture = _controller.initialize();
+    // _controller.dispose();
+  }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   setState(() {
+  //     camera = true;
+  //   });
+  //   _controller = CameraController(
+  //     widget.cameras[0],
+  //     ResolutionPreset.medium,
+  //   );
+
+  //   _initializeControllerFuture = _controller.initialize();
+  // }
+
+  // @override
+  // void dispose() {
+  //   _controller.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -368,48 +407,114 @@ class _LoginPageState extends State<LoginPage> {
                             flex: 1,
                             child: Container(
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                Center(
-                                  child: Container(
-                                    width: 326,
-                                    height: 366,
-                                    child: Image(
-                                      image: AssetImage('assets/images/image120.jpg'),
-                                      fit: BoxFit.contain,
-                                      repeat: ImageRepeat.repeatX,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    camera == false
+                                        ? SizedBox(
+                                          height: 366,
+                                          child: Material(
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                            child: Container(
+                                              width: 270,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(50),
+                                                  color: Color.fromRGBO(
+                                                      0, 0, 0, 0.25)),
+                                              child: Material(
+                                                borderRadius:
+                                                    BorderRadius.circular(50),
+                                                color: Colors.transparent,
+                                                child: InkWell(
+                                                  splashColor: Color.fromRGBO(
+                                                      0,
+                                                      0,
+                                                      0,
+                                                      0.5), //untuk mengganti animasi warna ketika di klik
+                                                  borderRadius:
+                                                      BorderRadius.circular(50),
+                                                  onTap: () {
+                                                    activeCamera();
+                                                  },
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            15),
+                                                    child: Center(
+                                                        child: Text(
+                                                      'Start',
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 22,
+                                                        fontFamily: 'Poppins',
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        height: 0,
+                                                      ),
+                                                    )),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        )
+                                        : FutureBuilder<void>(
+                                            future: _initializeControllerFuture,
+                                            builder: (context, snapshot) {
+                                              if (snapshot.connectionState ==
+                                                  ConnectionState.done) {
+                                                return Container(
+                                                    width: 326,
+                                                    height: 366,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12),
+                                                    ),
+                                                    child: CameraPreview(
+                                                        _controller));
+                                              } else {
+                                                return Center(
+                                                    child: Container(
+                                                        width: 326,
+                                                        height: 366,
+                                                        child:
+                                                            CircularProgressIndicator()));
+                                              }
+                                            },
+                                          ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 40),
+                                      child: Text(
+                                        'Log in with Face',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Color(0xFF333333),
+                                          fontSize: 40,
+                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w600,
+                                          height: 0,
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 40),
-                                  child: Text(
-                                    'Log in with Face',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Color(0xFF333333),
-                                      fontSize: 40,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w600,
-                                      height: 0,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 4),
-                                  child: Text(
-                                    'position your face in front of the camera',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Color(0xFF666666),
-                                      fontSize: 22,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w400,
-                                      height: 0,
-                                    ),
-                                  ),
-                                )
-                              ]),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 4),
+                                      child: Text(
+                                        'position your face in front of the camera',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Color(0xFF666666),
+                                          fontSize: 22,
+                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w400,
+                                          height: 0,
+                                        ),
+                                      ),
+                                    )
+                                  ]),
                             ))
                       ],
                     ),
