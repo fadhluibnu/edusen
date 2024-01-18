@@ -21,37 +21,37 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController email_controller = TextEditingController();
   TextEditingController password_controller = TextEditingController();
 
-  List<CameraDescription>? cameras; //list out the camera available
-  CameraController? cameraController; //controller for camera
-  XFile? image; //for captured image
+  // List<CameraDescription>? cameras; //list out the camera available
+  // CameraController? cameraController; //controller for camera
+  // XFile? image; //for captured image
 
-  @override
-  void initState() {
-    loadCamera();
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   loadCamera();
+  //   super.initState();
+  // }
 
-  loadCamera() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    try {
-      cameras = await availableCameras();
-      if (cameras != null) {
-        cameraController = CameraController(cameras![0], ResolutionPreset.max);
-        //cameras[0] = first camera, change to 1 to another camera
+  // loadCamera() async {
+  //   WidgetsFlutterBinding.ensureInitialized();
+  //   try {
+  //     cameras = await availableCameras();
+  //     if (cameras != null) {
+  //       cameraController = CameraController(cameras![0], ResolutionPreset.max);
+  //       //cameras[0] = first camera, change to 1 to another camera
 
-        cameraController!.initialize().then((_) {
-          if (!mounted) {
-            return;
-          }
-          setState(() {});
-        });
-      } else {
-        print("NO any camera found");
-      }
-    } on CameraException catch (e) {
-       print("NO any camera found");
-    }
-  }
+  //       cameraController!.initialize().then((_) {
+  //         if (!mounted) {
+  //           return;
+  //         }
+  //         setState(() {});
+  //       });
+  //     } else {
+  //       print("NO any camera found");
+  //     }
+  //   } on CameraException catch (e) {
+  //      print("NO any camera found");
+  //   }
+  // }
 
   int step = 1;
   void SubmitStepOne() {
@@ -332,7 +332,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 )
                               : RegisterStepTwo(
                                   submitForm: submitForm,
-                                  cameraController: cameraController,
+                                  // cameraController: cameraController,
                                 )
                         ]),
                   ),

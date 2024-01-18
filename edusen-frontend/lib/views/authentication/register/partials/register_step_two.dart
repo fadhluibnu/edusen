@@ -65,13 +65,13 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                 ],
               ),
             ),
-            widget.cameraController == null
-                ? Center(child: Text("Loading Camera..."))
-                : !widget.cameraController!.value.isInitialized
-                    ? Center(
-                        child: CircularProgressIndicator(),
-                      )
-                    : CameraPreview(widget.cameraController!),
+            // widget.cameraController == null
+            //     ? Center(child: Text("Loading Camera..."))
+            //     : !widget.cameraController!.value.isInitialized
+            //         ? Center(
+            //             child: CircularProgressIndicator(),
+            //           )
+            //         : CameraPreview(widget.cameraController!),
             // Padding(
             //     padding: EdgeInsets.only(top: 32),
             //     child: Center(

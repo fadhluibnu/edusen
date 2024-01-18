@@ -3,7 +3,6 @@ import 'package:edusen/views/authentication/register/register.dart';
 import 'package:flutter/material.dart';
 
 import 'package:camera/camera.dart';
-import 'package:flutter/material.dart';
 
 void main() async {
   String route = "/";
@@ -12,15 +11,14 @@ void main() async {
     route = "/login";
   }
 
-  WidgetsFlutterBinding.ensureInitialized();
-  final cameras = await availableCameras();
-
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     initialRoute: LoginPage.route,
     title: "Main Page",
     routes: {
-      LoginPage.route: (context) => LoginPage(cameras: cameras),
+      LoginPage.route: (context) => LoginPage(
+        // cameras: cameras
+        ),
       RegisterPage.route: (context) => RegisterPage(),
     },
   ));
