@@ -1,19 +1,40 @@
 import 'package:camera/camera.dart';
 import 'package:edusen/views/authentication/login/template/login_page.dart';
+import 'package:edusen/views/home.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class RegisterStepTwo extends StatefulWidget {
-  const RegisterStepTwo({super.key, this.submitForm, this.cameraController});
+  const RegisterStepTwo({super.key, this.submitForm, required this.cameras});
 
   final Function? submitForm;
-  final CameraController? cameraController;
+  final List<CameraDescription> cameras;
 
   @override
   State<RegisterStepTwo> createState() => _RegisterStepTwoState();
 }
 
 class _RegisterStepTwoState extends State<RegisterStepTwo> {
+  late CameraController _controller;
+  late Future<void> _initializeControllerFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = CameraController(
+      widget.cameras[0],
+      ResolutionPreset.medium,
+    );
+
+    _initializeControllerFuture = _controller.initialize();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,8 +42,8 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 24),
+            const Padding(
+              padding: EdgeInsets.only(top: 24),
               child: Text(
                 'Scan Your Face',
                 style: TextStyle(
@@ -37,7 +58,7 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
             Text.rich(
               TextSpan(
                 children: [
-                  TextSpan(
+                  const TextSpan(
                     text: 'Already have an ccount?',
                     style: TextStyle(
                       color: Color(0xFF333333),
@@ -49,7 +70,7 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                   ),
                   TextSpan(
                       text: ' Log in',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color(0xFF111111),
                         fontSize: 16,
                         fontFamily: 'Poppins',
@@ -58,20 +79,34 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                         height: 0,
                       ),
                       recognizer: TapGestureRecognizer()
-                        ..onTap = () => Navigator.pushReplacementNamed(
-                              context,
-                              LoginPage.route,
-                            )),
+                        ..onTap = () => Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    LoginPage(cameras: widget.cameras)))),
                 ],
               ),
             ),
-            // widget.cameraController == null
-            //     ? Center(child: Text("Loading Camera..."))
-            //     : !widget.cameraController!.value.isInitialized
-            //         ? Center(
-            //             child: CircularProgressIndicator(),
-            //           )
-            //         : CameraPreview(widget.cameraController!),
+            FutureBuilder<void>(
+              future: _initializeControllerFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return Container(
+                      width: 326,
+                      height: 366,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: CameraPreview(_controller));
+                } else {
+                  return Center(
+                      child: Container(
+                          width: 326,
+                          height: 366,
+                          child: const CircularProgressIndicator()));
+                }
+              },
+            ),
             // Padding(
             //     padding: EdgeInsets.only(top: 32),
             //     child: Center(
@@ -84,7 +119,7 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
             //         ),
             //       ),
             //     )),
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(top: 24),
               child: Center(
                 child: Text(
@@ -101,26 +136,30 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 32),
+              padding: const EdgeInsets.only(top: 32),
               child: Material(
                 borderRadius: BorderRadius.circular(50),
                 child: Container(
                   width: 270,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
-                      color: Color.fromRGBO(0, 0, 0, 0.25)),
+                      color: Color(0xFF8211FB)),
                   child: Material(
                     borderRadius: BorderRadius.circular(50),
                     color: Colors.transparent,
                     child: InkWell(
-                      splashColor: Color.fromRGBO(0, 0, 0,
+                      splashColor: const Color.fromRGBO(0, 0, 0,
                           0.5), //untuk mengganti animasi warna ketika di klik
                       borderRadius: BorderRadius.circular(50),
                       onTap: () {
-                        widget.submitForm?.call();
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomePage(
+                                    login: "true", cameras: widget.cameras)));
                       },
-                      child: Padding(
-                        padding: const EdgeInsets.all(15),
+                      child: const Padding(
+                        padding: EdgeInsets.all(15),
                         child: Center(
                             child: Text(
                           'Finish',
@@ -140,11 +179,11 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 16),
+              padding: const EdgeInsets.only(top: 16),
               child: Text.rich(
                 TextSpan(
                   children: [
-                    TextSpan(
+                    const TextSpan(
                       text: 'Already have an ccount?',
                       style: TextStyle(
                         color: Color(0xFF333333),
@@ -156,7 +195,7 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                     ),
                     TextSpan(
                         text: 'Log in  ',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Color(0xFF111111),
                           fontSize: 16,
                           fontFamily: 'Poppins',
@@ -165,10 +204,11 @@ class _RegisterStepTwoState extends State<RegisterStepTwo> {
                           height: 0,
                         ),
                         recognizer: TapGestureRecognizer()
-                          ..onTap = () => Navigator.pushReplacementNamed(
-                                context,
-                                LoginPage.route,
-                              )),
+                          ..onTap = () => Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      LoginPage(cameras: widget.cameras)))),
                   ],
                 ),
               ),

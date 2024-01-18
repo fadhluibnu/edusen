@@ -39,6 +39,8 @@ dependencies:
   camera: ^0.10.5+9
   path_provider: ^2.1.2
   path: ^1.8.3
+  audioplayers: ^5.2.1
+  permission_handler: ^11.2.0
 
 dev_dependencies:
   flutter_test:
@@ -65,6 +67,24 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/image120.jpg
+    - assets/images/logoedusen.png
+    - assets/images/back-end-developer.png
+    - assets/images/copywriter.png
+    - assets/images/coursera.png
+    - assets/images/educational-tech-section-2.jpeg
+    - assets/images/front-end-developer.png
+    - assets/images/google.png
+    - assets/images/guitar.png
+    - assets/images/idf-fundation.png
+    - assets/images/image-header.png
+    - assets/images/music-vocal.png
+    - assets/images/person-in-section6.png
+    - assets/images/person-in-section7.png
+    - assets/images/product-management-basic.png
+    - assets/images/skill-share.png
+    - assets/images/udemy.png
+    - assets/images/back-person-section-6.png
+    - assets/images/vesctorslide1.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -90,6 +110,14 @@ flutter:
   #         weight: 700
   #
   fonts:
+    - family: Togas
+      fonts:
+        - asset: assets/icons/togas/fonts/Togas.ttf
+
+    - family: Acheivment
+      fonts:
+        - asset: assets/icons/acheivment/fonts/Acheivment.ttf
+
     - family: MyFlutterApp
       fonts:
         - asset: assets/icons/MyFlutterApp.ttf
