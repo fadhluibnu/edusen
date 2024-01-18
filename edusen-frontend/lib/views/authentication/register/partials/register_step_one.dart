@@ -2,14 +2,23 @@ import 'package:edusen/my_flutter_app_icons.dart';
 import 'package:edusen/views/authentication/login/template/login_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:camera/camera.dart';
 
 class RegisterStepOne extends StatefulWidget {
-  const RegisterStepOne({super.key, this.step, this.nextStep, this.name_controller, this.email_controller, this.password_controller});
+  const RegisterStepOne(
+      {super.key,
+      this.step,
+      this.nextStep,
+      this.name_controller,
+      this.email_controller,
+      this.password_controller,
+      required this.cameras});
   final Function? nextStep;
   final int? step;
   final TextEditingController? name_controller;
   final TextEditingController? email_controller;
   final TextEditingController? password_controller;
+  final List<CameraDescription> cameras;
 
   @override
   State<RegisterStepOne> createState() => _RegisterStepOneState();
@@ -19,11 +28,11 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 24),
+      padding: const EdgeInsets.only(top: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(top: 24),
             child: Text(
               'Create an account',
@@ -39,7 +48,7 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
           Text.rich(
             TextSpan(
               children: [
-                TextSpan(
+                const TextSpan(
                   text: 'Already have an ccount?',
                   style: TextStyle(
                     color: Color(0xFF333333),
@@ -51,7 +60,7 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                 ),
                 TextSpan(
                     text: ' Log in',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Color(0xFF111111),
                       fontSize: 16,
                       fontFamily: 'Poppins',
@@ -60,19 +69,20 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                       height: 0,
                     ),
                     recognizer: TapGestureRecognizer()
-                      ..onTap = () => Navigator.pushReplacementNamed(
-                            context,
-                            LoginPage.route,
-                          )),
+                      ..onTap = () => Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  LoginPage(cameras: widget.cameras)))),
               ],
             ),
           ),
           Container(
-              padding: EdgeInsets.only(top: 32),
+              padding: const EdgeInsets.only(top: 32),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.only(bottom: 7),
                       child: Text(
                         'Name',
@@ -90,22 +100,22 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
-                              color: Color.fromARGB(76, 102, 102, 102))),
-                      padding: EdgeInsets.only(
+                              color: const Color.fromARGB(76, 102, 102, 102))),
+                      padding: const EdgeInsets.only(
                           left: 10, right: 10, top: 5, bottom: 5),
                       child: TextField(
                         controller: widget.name_controller,
-                        onChanged: (value){
+                        onChanged: (value) {
                           // print(widget.name_controller?.text);
                         },
-                        cursorColor: Color.fromARGB(255, 82, 82, 82),
-                        style: TextStyle(
+                        cursorColor: const Color.fromARGB(255, 82, 82, 82),
+                        style: const TextStyle(
                           color: Color(0xFF666666),
                           fontSize: 16,
                           fontFamily: "Poppins",
                           fontWeight: FontWeight.w400,
                         ),
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           contentPadding: EdgeInsets.all(0),
                           filled: true,
                           fillColor: Colors.transparent,
@@ -122,11 +132,11 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                     )
                   ])),
           Container(
-              padding: EdgeInsets.only(top: 24),
+              padding: const EdgeInsets.only(top: 24),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                   Padding(
+                    const Padding(
                       padding: EdgeInsets.only(bottom: 7),
                       child: Text(
                         'Email',
@@ -144,22 +154,22 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
-                              color: Color.fromARGB(76, 102, 102, 102))),
-                      padding: EdgeInsets.only(
+                              color: const Color.fromARGB(76, 102, 102, 102))),
+                      padding: const EdgeInsets.only(
                           left: 10, right: 10, top: 5, bottom: 5),
                       child: TextField(
                         controller: widget.email_controller,
-                        onChanged: (value){
+                        onChanged: (value) {
                           // print(widget.email_controller?.text);
                         },
-                        cursorColor: Color.fromARGB(255, 82, 82, 82),
-                        style: TextStyle(
+                        cursorColor: const Color.fromARGB(255, 82, 82, 82),
+                        style: const TextStyle(
                           color: Color(0xFF666666),
                           fontSize: 16,
                           fontFamily: "Poppins",
                           fontWeight: FontWeight.w400,
                         ),
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           contentPadding: EdgeInsets.all(0),
                           filled: true,
                           fillColor: Colors.transparent,
@@ -181,11 +191,11 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(bottom: 7),
+                      padding: const EdgeInsets.only(bottom: 7),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
+                          const Text(
                             'Password',
                             textAlign: TextAlign.start,
                             style: TextStyle(
@@ -200,10 +210,10 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                             onTap: () {
                               print("hide");
                             },
-                            child: Text.rich(TextSpan(children: [
+                            child: const Text.rich(TextSpan(children: [
                               WidgetSpan(
                                   child: Padding(
-                                padding: const EdgeInsets.only(right: 8),
+                                padding: EdgeInsets.only(right: 8),
                                 child: Icon(
                                   MyFlutterApp.eye_closed,
                                   size: 14,
@@ -229,22 +239,22 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
-                              color: Color.fromARGB(76, 102, 102, 102))),
-                      padding: EdgeInsets.only(
+                              color: const Color.fromARGB(76, 102, 102, 102))),
+                      padding: const EdgeInsets.only(
                           left: 10, right: 10, top: 5, bottom: 5),
                       child: TextField(
                         controller: widget.password_controller,
-                        onChanged: (value){
+                        onChanged: (value) {
                           // print(widget.password_controller?.text);
                         },
-                        cursorColor: Color.fromARGB(255, 82, 82, 82),
-                        style: TextStyle(
+                        cursorColor: const Color.fromARGB(255, 82, 82, 82),
+                        style: const TextStyle(
                           color: Color(0xFF666666),
                           fontSize: 16,
                           fontFamily: "Poppins",
                           fontWeight: FontWeight.w400,
                         ),
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           contentPadding: EdgeInsets.all(0),
                           filled: true,
                           fillColor: Colors.transparent,
@@ -259,7 +269,7 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                         ),
                       ),
                     ),
-                    Text(
+                    const Text(
                       'Use 8 or more characters with a mix of letters, numbers & symbols',
                       style: TextStyle(
                         color: Color(0xFF666666),
@@ -270,8 +280,8 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                       ),
                     )
                   ])),
-          Padding(
-            padding: const EdgeInsets.only(top: 32),
+          const Padding(
+            padding: EdgeInsets.only(top: 32),
             child: Text.rich(
               TextSpan(
                 children: [
@@ -322,25 +332,26 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 32),
+            padding: const EdgeInsets.only(top: 32),
             child: Material(
               borderRadius: BorderRadius.circular(50),
               child: Container(
                 width: 270,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
-                    color: Color.fromRGBO(0, 0, 0, 0.25)),
+                    color: Color(0xFF8211FB)),
                 child: Material(
                   borderRadius: BorderRadius.circular(50),
                   color: Colors.transparent,
                   child: InkWell(
-                    splashColor: Color.fromRGBO(0, 0, 0, 0.5), //untuk mengganti animasi warna ketika di klik
+                    splashColor: const Color.fromRGBO(0, 0, 0,
+                        0.5), //untuk mengganti animasi warna ketika di klik
                     borderRadius: BorderRadius.circular(50),
                     onTap: () {
                       widget.nextStep?.call();
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.all(15),
+                    child: const Padding(
+                      padding: EdgeInsets.all(15),
                       child: Center(
                           child: Text(
                         'Next',
@@ -360,11 +371,11 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 16),
+            padding: const EdgeInsets.only(top: 16),
             child: Text.rich(
               TextSpan(
                 children: [
-                  TextSpan(
+                  const TextSpan(
                     text: 'Already have an ccount?',
                     style: TextStyle(
                       color: Color(0xFF333333),
@@ -376,8 +387,8 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                   ),
                   TextSpan(
                       text: 'Log in  ',
-                      style: TextStyle(
-                        color: Color(0xFF111111),
+                      style: const TextStyle(
+                        color: const Color(0xFF111111),
                         fontSize: 16,
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w400,
@@ -385,10 +396,11 @@ class _RegisterStepOneState extends State<RegisterStepOne> {
                         height: 0,
                       ),
                       recognizer: TapGestureRecognizer()
-                        ..onTap = () => Navigator.pushReplacementNamed(
-                              context,
-                              LoginPage.route,
-                            )),
+                        ..onTap = () => Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    LoginPage(cameras: widget.cameras)))),
                 ],
               ),
             ),

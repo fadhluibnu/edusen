@@ -3,6 +3,7 @@ import 'package:edusen/my_flutter_app_icons.dart';
 import 'package:edusen/views/authentication/login/template/login_page.dart';
 import 'package:edusen/views/authentication/register/partials/register_step_one.dart';
 import 'package:edusen/views/authentication/register/partials/register_step_two.dart';
+import 'package:edusen/views/home.dart';
 import 'package:edusen/views/route/push_and_back.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,8 @@ import 'package:flutter/material.dart';
 class RegisterPage extends StatefulWidget {
   static const String route = '/register';
 
-  const RegisterPage({super.key});
+  const RegisterPage({super.key, required this.cameras});
+  final List<CameraDescription> cameras;
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -21,37 +23,37 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController email_controller = TextEditingController();
   TextEditingController password_controller = TextEditingController();
 
-  List<CameraDescription>? cameras; //list out the camera available
-  CameraController? cameraController; //controller for camera
-  XFile? image; //for captured image
+  // List<CameraDescription>? cameras; //list out the camera available
+  // CameraController? cameraController; //controller for camera
+  // XFile? image; //for captured image
 
-  @override
-  void initState() {
-    loadCamera();
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   loadCamera();
+  //   super.initState();
+  // }
 
-  loadCamera() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    try {
-      cameras = await availableCameras();
-      if (cameras != null) {
-        cameraController = CameraController(cameras![0], ResolutionPreset.max);
-        //cameras[0] = first camera, change to 1 to another camera
+  // loadCamera() async {
+  //   WidgetsFlutterBinding.ensureInitialized();
+  //   try {
+  //     cameras = await availableCameras();
+  //     if (cameras != null) {
+  //       cameraController = CameraController(cameras![0], ResolutionPreset.max);
+  //       //cameras[0] = first camera, change to 1 to another camera
 
-        cameraController!.initialize().then((_) {
-          if (!mounted) {
-            return;
-          }
-          setState(() {});
-        });
-      } else {
-        print("NO any camera found");
-      }
-    } on CameraException catch (e) {
-       print("NO any camera found");
-    }
-  }
+  //       cameraController!.initialize().then((_) {
+  //         if (!mounted) {
+  //           return;
+  //         }
+  //         setState(() {});
+  //       });
+  //     } else {
+  //       print("NO any camera found");
+  //     }
+  //   } on CameraException catch (e) {
+  //      print("NO any camera found");
+  //   }
+  // }
 
   int step = 1;
   void SubmitStepOne() {
@@ -61,7 +63,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   void SubmitStepTwo() {
-    print("FInish Redirect");
+    Navigator.pushReplacementNamed(context, HomePage.route, arguments:{'login': "true"});
   }
 
   void submitForm() {
@@ -100,14 +102,14 @@ class _RegisterPageState extends State<RegisterPage> {
                 children: [
                   Container(
                     width: MediaQuery.of(context).size.width - 565,
-                    color: Color(0xFF8211FB),
+                    color: const Color(0xFF8211FB),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text.rich(
                           TextSpan(
                             children: [
-                              TextSpan(
+                              const TextSpan(
                                 text: 'Belajar ',
                                 style: TextStyle(
                                   color: Color(0xFFEEF9FE),
@@ -119,9 +121,9 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                               WidgetSpan(
                                   child: Container(
-                                padding: EdgeInsets.only(left: 10),
+                                padding: const EdgeInsets.only(left: 10),
                                 color: Colors.white,
-                                child: Text(
+                                child: const Text(
                                   'gratis',
                                   style: TextStyle(
                                     color: Color(0xFF4C4CFF),
@@ -132,7 +134,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   ),
                                 ),
                               )),
-                              TextSpan(
+                              const TextSpan(
                                 text: ' dimana saja,\nkapan saja! ',
                                 style: TextStyle(
                                   color: Color(0xFFEEF9FE),
@@ -156,7 +158,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         height: 225,
                         decoration: ShapeDecoration(
                           color: Colors.white.withOpacity(0.25),
-                          shape: OvalBorder(),
+                          shape: const OvalBorder(),
                         ),
                       )),
                   Positioned(
@@ -167,7 +169,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         height: 354,
                         decoration: ShapeDecoration(
                           color: Colors.white.withOpacity(0.25),
-                          shape: OvalBorder(),
+                          shape: const OvalBorder(),
                         ),
                       )),
                   Positioned(
@@ -178,7 +180,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         height: 354,
                         decoration: ShapeDecoration(
                           color: Colors.white.withOpacity(0.25),
-                          shape: OvalBorder(),
+                          shape: const OvalBorder(),
                         ),
                       )),
                   Positioned(
@@ -189,7 +191,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         height: 600,
                         decoration: ShapeDecoration(
                           color: Colors.white.withOpacity(0.25),
-                          shape: OvalBorder(),
+                          shape: const OvalBorder(),
                         ),
                       )),
                   Positioned(
@@ -200,7 +202,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         height: 354,
                         decoration: ShapeDecoration(
                           color: Colors.white.withOpacity(0.25),
-                          shape: OvalBorder(),
+                          shape: const OvalBorder(),
                         ),
                       )),
                 ],
@@ -215,7 +217,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         children: [
                           Container(
                             // color: Colors.grey,
-                            padding: EdgeInsets.only(left: 40, right: 40),
+                            padding: const EdgeInsets.only(left: 40, right: 40),
                             child: Stack(
                               children: [
                                 Positioned(
@@ -227,7 +229,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                         left: 80, right: 60),
                                     child: Container(
                                       height: 1,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                           color: Color(0xFF333333)),
                                     ),
                                   ),
@@ -243,11 +245,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                           height: 20,
                                           decoration: ShapeDecoration(
                                             color: step == 1
-                                                ? Color(0xFF333333)
-                                                : Color(0xFF4C4CFF),
-                                            shape: OvalBorder(),
+                                                ? const Color(0xFF333333)
+                                                : const Color(0xFF4C4CFF),
+                                            shape: const OvalBorder(),
                                           ),
-                                          child: Center(
+                                          child: const Center(
                                             child: Text(
                                               '1',
                                               textAlign: TextAlign.center,
@@ -266,8 +268,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             color: step == 1
-                                                ? Color(0xFF333333)
-                                                : Color(0xFF4C4CFF),
+                                                ? const Color(0xFF333333)
+                                                : const Color(0xFF4C4CFF),
                                             fontSize: 15,
                                             fontFamily: 'Poppins',
                                             fontWeight: FontWeight.w400,
@@ -283,12 +285,12 @@ class _RegisterPageState extends State<RegisterPage> {
                                           height: 20,
                                           decoration: ShapeDecoration(
                                             color: step == 2
-                                                ? Color(0xFF333333)
-                                                : Color.fromARGB(
+                                                ? const Color(0xFF333333)
+                                                : const Color.fromARGB(
                                                     255, 168, 168, 168),
-                                            shape: OvalBorder(),
+                                            shape: const OvalBorder(),
                                           ),
-                                          child: Center(
+                                          child: const Center(
                                             child: Text(
                                               '2',
                                               textAlign: TextAlign.center,
@@ -307,8 +309,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             color: step == 2
-                                                ? Color(0xFF333333)
-                                                : Color(0x7F333333),
+                                                ? const Color(0xFF333333)
+                                                : const Color(0x7F333333),
                                             fontSize: 15,
                                             fontFamily: 'Poppins',
                                             fontWeight: FontWeight.w400,
@@ -329,10 +331,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                   name_controller: name_controller,
                                   email_controller: email_controller,
                                   password_controller: password_controller,
+                                  cameras: widget.cameras,
                                 )
                               : RegisterStepTwo(
                                   submitForm: submitForm,
-                                  cameraController: cameraController,
+                                  cameras: widget.cameras,
                                 )
                         ]),
                   ),

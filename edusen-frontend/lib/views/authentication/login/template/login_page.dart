@@ -1,4 +1,5 @@
 import 'package:edusen/views/authentication/register/register.dart';
+import 'package:edusen/views/home.dart';
 import 'package:edusen/views/route/push_and_back.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -26,24 +27,9 @@ class _LoginPageState extends State<LoginPage> {
 
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
-  bool camera = false;
+  // bool camera = false;
 
-  void activeCamera() {
-    setState(() {
-      camera = true;
-    });
-    _controller = CameraController(
-      widget.cameras[0],
-      ResolutionPreset.medium,
-    );
-
-    _initializeControllerFuture = _controller.initialize();
-    // _controller.dispose();
-  }
-
-  // @override
-  // void initState() {
-  //   super.initState();
+  // void activeCamera() {
   //   setState(() {
   //     camera = true;
   //   });
@@ -53,13 +39,25 @@ class _LoginPageState extends State<LoginPage> {
   //   );
 
   //   _initializeControllerFuture = _controller.initialize();
+  //   // _controller.dispose();
   // }
 
-  // @override
-  // void dispose() {
-  //   _controller.dispose();
-  //   super.dispose();
-  // }
+  @override
+  void initState() {
+    super.initState();
+    _controller = CameraController(
+      widget.cameras[0],
+      ResolutionPreset.medium,
+    );
+
+    _initializeControllerFuture = _controller.initialize();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
         body: Container(
           height: double.infinity,
           width: double.infinity,
-          color: Color(0xFF8211FB),
+          color: const Color(0xFF8211FB),
           child: Stack(
             children: [
               Positioned(
@@ -81,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                     height: 352.38,
                     decoration: ShapeDecoration(
                       color: Colors.white.withOpacity(0.25),
-                      shape: OvalBorder(),
+                      shape: const OvalBorder(),
                     ),
                   )),
               Positioned(
@@ -92,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                     height: 223.97,
                     decoration: ShapeDecoration(
                       color: Colors.white.withOpacity(0.25),
-                      shape: OvalBorder(),
+                      shape: const OvalBorder(),
                     ),
                   )),
               Positioned(
@@ -103,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                     height: 223.97,
                     decoration: ShapeDecoration(
                       color: Colors.white.withOpacity(0.25),
-                      shape: OvalBorder(),
+                      shape: const OvalBorder(),
                     ),
                   )),
               Positioned(
@@ -114,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                     height: 352.38,
                     decoration: ShapeDecoration(
                       color: Colors.white.withOpacity(0.25),
-                      shape: OvalBorder(),
+                      shape: const OvalBorder(),
                     ),
                   )),
               Positioned(
@@ -125,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
                     height: 352.38,
                     decoration: ShapeDecoration(
                       color: Colors.white.withOpacity(0.25),
-                      shape: OvalBorder(),
+                      shape: const OvalBorder(),
                     ),
                   )),
               Positioned(
@@ -136,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
                     height: 352.38,
                     decoration: ShapeDecoration(
                       color: Colors.white.withOpacity(0.25),
-                      shape: OvalBorder(),
+                      shape: const OvalBorder(),
                     ),
                   )),
               Positioned(
@@ -147,7 +145,7 @@ class _LoginPageState extends State<LoginPage> {
                     height: 597.26,
                     decoration: ShapeDecoration(
                       color: Colors.white.withOpacity(0.25),
-                      shape: OvalBorder(),
+                      shape: const OvalBorder(),
                     ),
                   )),
               Center(
@@ -330,35 +328,53 @@ class _LoginPageState extends State<LoginPage> {
                                     )),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 32),
-                                  child: ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.push(context,
-                                            MaterialPageRoute(
-                                                builder: (context) {
-                                          return RegisterPage();
-                                        }));
-                                      },
-                                      style: ButtonStyle(
-                                          elevation:
-                                              MaterialStateProperty.all(0),
-                                          backgroundColor:
-                                              MaterialStateProperty.all(
-                                                  const Color.fromRGBO(
-                                                      0, 0, 0, 0.25))),
-                                      child: const Padding(
-                                        padding: EdgeInsets.all(15),
-                                        child: Text(
-                                          'Log in',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 22,
-                                            fontFamily: 'Poppins',
-                                            fontWeight: FontWeight.w500,
-                                            height: 0,
+                                  child: Material(
+                                    borderRadius: BorderRadius.circular(50),
+                                    child: Container(
+                                      // width: 270,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                          color: Color(0xFF8211FB)),
+                                      child: Material(
+                                        borderRadius: BorderRadius.circular(50),
+                                        color: Colors.transparent,
+                                        child: InkWell(
+                                          splashColor: const Color.fromRGBO(
+                                              0,
+                                              0,
+                                              0,
+                                              0.5), //untuk mengganti animasi warna ketika di klik
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                          onTap: () {
+                                            Navigator.pushReplacement(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        RegisterPage(
+                                                            cameras: widget
+                                                                .cameras)));
+                                          },
+                                          child: const Padding(
+                                            padding: EdgeInsets.all(15),
+                                            child: Center(
+                                                child: Text(
+                                              'Log In',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 22,
+                                                fontFamily: 'Poppins',
+                                                fontWeight: FontWeight.w500,
+                                                height: 0,
+                                              ),
+                                            )),
                                           ),
                                         ),
-                                      )),
+                                      ),
+                                    ),
+                                  ),
                                 ),
                                 Padding(
                                     padding: const EdgeInsets.only(top: 32),
@@ -387,14 +403,14 @@ class _LoginPageState extends State<LoginPage> {
                                                 height: 0,
                                               ),
                                               recognizer: TapGestureRecognizer()
-                                                ..onTap = () => Navigator
-                                                        .pushReplacementNamed(
-                                                            context,
-                                                            RegisterPage.route,
-                                                            arguments: {
-                                                          'route':
-                                                              LoginPage.route,
-                                                        })),
+                                                ..onTap = () =>
+                                                    Navigator.pushReplacement(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                RegisterPage(
+                                                                    cameras: widget
+                                                                        .cameras)))),
                                         ],
                                       ),
                                       textAlign: TextAlign.center,
@@ -409,85 +425,86 @@ class _LoginPageState extends State<LoginPage> {
                               child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    camera == false
-                                        ? SizedBox(
-                                          height: 366,
-                                          child: Material(
-                                            borderRadius:
-                                                BorderRadius.circular(50),
-                                            child: Container(
-                                              width: 270,
+                                    // camera == false
+                                    //     ? SizedBox(
+                                    //         height: 366,
+                                    //         child: Material(
+                                    //           borderRadius:
+                                    //               BorderRadius.circular(50),
+                                    //           child: Container(
+                                    //             width: 270,
+                                    //             decoration: BoxDecoration(
+                                    //                 borderRadius:
+                                    //                     BorderRadius.circular(
+                                    //                         50),
+                                    //                 color: const Color.fromRGBO(
+                                    //                     0, 0, 0, 0.25)),
+                                    //             child: Material(
+                                    //               borderRadius:
+                                    //                   BorderRadius.circular(50),
+                                    //               color: Colors.transparent,
+                                    //               child: InkWell(
+                                    //                 splashColor: const Color.fromRGBO(
+                                    //                     0,
+                                    //                     0,
+                                    //                     0,
+                                    //                     0.5), //untuk mengganti animasi warna ketika di klik
+                                    //                 borderRadius:
+                                    //                     BorderRadius.circular(
+                                    //                         50),
+                                    //                 onTap: () {
+                                    //                   activeCamera();
+                                    //                 },
+                                    //                 child: const Padding(
+                                    //                   padding:
+                                    //                       EdgeInsets.all(
+                                    //                           15),
+                                    //                   child: Center(
+                                    //                       child: Text(
+                                    //                     'Start',
+                                    //                     textAlign:
+                                    //                         TextAlign.center,
+                                    //                     style: TextStyle(
+                                    //                       color: Colors.white,
+                                    //                       fontSize: 22,
+                                    //                       fontFamily: 'Poppins',
+                                    //                       fontWeight:
+                                    //                           FontWeight.w500,
+                                    //                       height: 0,
+                                    //                     ),
+                                    //                   )),
+                                    //                 ),
+                                    //               ),
+                                    //             ),
+                                    //           ),
+                                    //         ))
+                                    //     :
+                                    FutureBuilder<void>(
+                                      future: _initializeControllerFuture,
+                                      builder: (context, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.done) {
+                                          return Container(
+                                              width: 326,
+                                              height: 366,
                                               decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(50),
-                                                  color: Color.fromRGBO(
-                                                      0, 0, 0, 0.25)),
-                                              child: Material(
                                                 borderRadius:
-                                                    BorderRadius.circular(50),
-                                                color: Colors.transparent,
-                                                child: InkWell(
-                                                  splashColor: Color.fromRGBO(
-                                                      0,
-                                                      0,
-                                                      0,
-                                                      0.5), //untuk mengganti animasi warna ketika di klik
-                                                  borderRadius:
-                                                      BorderRadius.circular(50),
-                                                  onTap: () {
-                                                    activeCamera();
-                                                  },
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            15),
-                                                    child: Center(
-                                                        child: Text(
-                                                      'Start',
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 22,
-                                                        fontFamily: 'Poppins',
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        height: 0,
-                                                      ),
-                                                    )),
-                                                  ),
-                                                ),
+                                                    BorderRadius.circular(12),
                                               ),
-                                            ),
-                                          )
-                                        )
-                                        : FutureBuilder<void>(
-                                            future: _initializeControllerFuture,
-                                            builder: (context, snapshot) {
-                                              if (snapshot.connectionState ==
-                                                  ConnectionState.done) {
-                                                return Container(
-                                                    width: 326,
-                                                    height: 366,
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12),
-                                                    ),
-                                                    child: CameraPreview(
-                                                        _controller));
-                                              } else {
-                                                return Center(
-                                                    child: Container(
-                                                        width: 326,
-                                                        height: 366,
-                                                        child:
-                                                            CircularProgressIndicator()));
-                                              }
-                                            },
-                                          ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 40),
+                                              child:
+                                                  CameraPreview(_controller));
+                                        } else {
+                                          return Center(
+                                              child: Container(
+                                                  width: 326,
+                                                  height: 366,
+                                                  child:
+                                                      const CircularProgressIndicator()));
+                                        }
+                                      },
+                                    ),
+                                    const Padding(
+                                      padding: EdgeInsets.only(top: 40),
                                       child: Text(
                                         'Log in with Face',
                                         textAlign: TextAlign.center,
@@ -500,8 +517,8 @@ class _LoginPageState extends State<LoginPage> {
                                         ),
                                       ),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 4),
+                                    const Padding(
+                                      padding: EdgeInsets.only(top: 4),
                                       child: Text(
                                         'position your face in front of the camera',
                                         textAlign: TextAlign.center,

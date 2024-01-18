@@ -29,11 +29,11 @@ class InputGeneratorState extends State<InputGenerator> {
         child:
             Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
           Padding(
-            padding: EdgeInsets.only(bottom: 7),
+            padding: const EdgeInsets.only(bottom: 7),
             child: Text(
               widget.inputLabel,
               textAlign: TextAlign.start,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Color(0xFF666666),
                 fontSize: 16,
                 fontFamily: "Poppins",
