@@ -1,13 +1,35 @@
 # edusen
 
-Edusen merupakan sebuah platform yang membantu edukasi khususnya kaum disabilitas sensorik.
+Edusen merupakan sebuah platform yang membantu edukasi khususnya kaum disabilitas sensorik. Dimana mereka bisa belajar di course yang kami sediakan. Rencana course ada beberapa kategori. Materi belajar berbentuk video (audio-visual) yang bisa diputar dan didengar. Dengan target kaum tuna netra, rencana aplikasi ini menyediakan fitur voice recognition yang diharapkan membantu mereka proses belajar, seperti untuk menjelaskan sedang di halaman mana, ingin menuju halaman apa, dan sedang di halaman tertentu. Pengguna juga bisa melakukan input suara dengan ketentuan tertentu, kemudian sistem akan bekerja sesuai inputan perintahnya.
+
+## Team
+
+Name : **Newbiesh**
+
+Member : 
+
+- **Husler**
+
+    - [Nisrina Amalia Iffatunnisa](mailto:nisrinaamaliaiffatunnisa@gmail.com)
+
+- **Hacker**
+
+    - [Fadhlu Ibnu 'Abbad](mailto:fadhluibnua@gmail.com)
+
+- **Hipster**
+        
+    - [Rakha Galih Nugraha Sukma](mailto:rakhagalih19@gmail.com)
+
+    - [Evi Nirmalasari](mailto:evinirmalaaaa@gmail.com)
+        
 
 ## Tech Stack
 
 - Dart
 - Flutter
-- Firebase
-- Google Cloud Platform
+- MySQL
+- Firebase (Firebase Hosting, Firestore)
+- Google Cloud Platform (App Enggine, Cloud Storage, Cloud SQL)
 
 ## Preview
 
