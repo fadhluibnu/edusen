@@ -46,9 +46,6 @@ Member :
     - **Step 1: Fill In Personal Data**
 
         ![step1register](https://github.com/fadhluibnu/edusen/blob/main/edusen-frontend/assets/images/Screenshot%20from%202024-01-13%2009-41-03.png?raw=true)
-      
-    - **Step 2: Fill In Personal Data**
- 
-        ![step2register](https://github.com/fadhluibnu/edusen/blob/main/edusen-frontend/assets/images/Screenshot%202024-01-19%20003551.png?raw=true)
+
 
         
